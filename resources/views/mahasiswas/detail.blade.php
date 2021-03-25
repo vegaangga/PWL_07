@@ -13,7 +13,7 @@
          <li class="list-group-item"><b>Jurusan: </b>{{$mahasiswa->jurusan}}</li>
          <li class="list-group-item"><b>No_Handphone: </b>{{$mahasiswa->no_handphone}}</li>
          <li class="list-group-item"><b>Email: </b>{{$mahasiswa->email}}</li>
-         <li class="list-group-item"><b>Tanggal Lahir: </b>{{$mahasiswa->tgl_lahir}}</li>
+         <li class="list-group-item"><b>Tanggal-Lahir: </b>{{$mahasiswa->tgl_lahir}}</li>
 
          </ul>
       </div>
