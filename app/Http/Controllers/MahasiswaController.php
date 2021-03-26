@@ -111,4 +111,23 @@ class MahasiswaController extends Controller
         return redirect()->route('mahasiswa.index')->with('success','Mahasiswa Berhasil  Dihapus');
     }
 
+    public function cari (Request $request)
+    {
+
+        $cari = $request -> get ('cari');
+        $post = DB::table('mahasiswa')->where('nama','like','%'.$cari.'%')->paginate(5);
+        return view('mahasiswas.index',['posts' => $post]);
+
+         /*
+        // 2 variabel
+        $posts = Mahasiswa::when($request->keyword, function ($query) use ($request) {
+            $query->where('nama', 'like', "%{$request->keyword}%")
+                ->orWhere('nim', 'like', "%{$request->keyword}%");
+        })->paginate(5);
+        return view('mahasiswas.index',compact('posts'));
+        */
+    }
+
+
+
 }
