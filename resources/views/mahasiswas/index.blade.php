@@ -11,7 +11,15 @@
             <div class="float-right my-2">
                 <a class="btn btn-success" href="{{ route('mahasiswa.create') }}"> Input Mahasiswa</a>
             </div>
-            
+            <form method="get" action="/search" id="myForm">
+                <div class="float-right my-2" style="margin-right:20px;">
+                    <button type="submit" class="btn btn-primary">Cari</button>
+                </div>
+                <div class="float-right my-2">
+                    <input type="cari" name="cari" class="form-control" id="cari" aria-describedby="cari" >
+                </div>
+            </form>
+            <div class="float-right my-3" style="margin-right:20px;><label for="cari">Cari</label></div>
         </div>
     </div>
 
