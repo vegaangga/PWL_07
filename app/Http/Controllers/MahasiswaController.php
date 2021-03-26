@@ -14,10 +14,11 @@ class MahasiswaController extends Controller
      */
     public function index()
     {
-        $mahasiswa=Mahasiswa::all();
+        //$mahasiswa=Mahasiswa::all()->paginate(1);
         // Mengambil semua isi tabel
-        $posts=Mahasiswa::orderBy('nim','desc')->paginate(5);
-        return view('mahasiswas.index',compact('mahasiswa','posts'))->with('i',(request()->input('page',1)-1)*5);
+        $posts=Mahasiswa::orderBy('nim','asc')->paginate(5);
+        //return view('mahasiswas.index',compact('mahasiswa','posts'))->with('i',(request()->input('page',1)-1)*5);
+        return view('mahasiswas.index',compact('posts'))->with('i',(request()->input('page',1)-1)*5);
     }
 
     /*
@@ -39,14 +40,15 @@ class MahasiswaController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(['nim'=>'required'
-        ,'nama'=>'required'
-        ,'kelas'=>'required'
-        ,'jurusan'=>'required'
-        ,'no_handphone'=>'required'
-        ,'email'=>'required'
-        ,'tanggal_lahir'=>'required'
-        ]);//fungsieloquentuntukmenambahdata
+        $request->validate(['nim'=>'required',
+        'nama'=>'required',
+        'kelas'=>'required',
+        'jurusan'=>'required',
+        'no_handphone'=>'required',
+        'email'=>'required',
+        'tgl_lahir'=>'required'
+        ]);
+        //fungsieloquentuntukmenambahdata
         Mahasiswa::create($request->all());
         //jikadataberhasilditambahkan,akankembalikehalamanutama
         return redirect()->route('mahasiswa.index')->with('success','Mahasiswa Berhasil Ditambahkan');
@@ -85,16 +87,16 @@ class MahasiswaController extends Controller
      */
     public function update(Request $request, $nim)
     {
-        $request->validate(['nim'=>'required'
-        ,'nama'=>'required'
-        ,'kelas'=>'required'
-        ,'jurusan'=>'required'
-        ,'no_handphone'=>'required'
-        ,'email'=>'required'
-        ,'tanggal_lahir'=>'required'
+        $request->validate(['nim'=>'required',
+        'nama'=>'required',
+        'kelas'=>'required',
+        'jurusan'=>'required',
+        'no_handphone'=>'required',
+        'email'=>'required',
+        'tgl_lahir'=>'required'
         ]);
         Mahasiswa::find($nim)->update($request->all());
-        return redirect()->route('mahasiswaa.index')->with('success','Mahasiswa Berhasil Diupdate');
+        return redirect()->route('mahasiswa.index')->with('success','Mahasiswa Berhasil Diupdate');
     }
 
     /**
