@@ -2,14 +2,20 @@
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">
-            <div class="pull-left mt-2">
+            <div class="pull-left mt-2" style="text-align: center">
                 <h2>JURUSAN TEKNOLOGI INFORMASI-POLITEKNIK NEGERI MALANG</h2>
+            </div>
+            <div class="float-left my-2">
+                {{ $posts->links() }}
             </div>
             <div class="float-right my-2">
                 <a class="btn btn-success" href="{{ route('mahasiswa.create') }}"> Input Mahasiswa</a>
             </div>
+            
         </div>
     </div>
+
+
 
  @if ($message = Session::get('success'))
     <div class="alert alert-success">
@@ -26,7 +32,7 @@
         <th>No_Handphone</th>
         <th width="280px">Action</th>
     </tr>
-    @foreach ($mahasiswa as $Mahasiswa)
+    @foreach ($posts as $Mahasiswa)
     <tr>
         <td>{{ $Mahasiswa->nim }}</td>
         <td>{{ $Mahasiswa->nama }}</td>
@@ -42,7 +48,11 @@
                 <button type="submit" class="btn btn-danger">Delete</button>
             </form>
         </td>
+
     </tr>
  @endforeach
+ <div>
+
+</div>
  </table>
 @endsection
