@@ -6,7 +6,7 @@
                 <h2>JURUSAN TEKNOLOGI INFORMASI-POLITEKNIK NEGERI MALANG</h2>
             </div>
             <div class="float-left my-2">
-                {{ $posts->links() }}
+                {{ $paginate->links() }}
             </div>
             <div class="float-right my-2">
                 <a class="btn btn-success" href="{{ route('mahasiswa.create') }}"> Input Mahasiswa</a>
@@ -40,11 +40,11 @@
         <th>No_Handphone</th>
         <th width="280px">Action</th>
     </tr>
-    @foreach ($posts as $Mahasiswa)
+    @foreach ($paginate as $Mahasiswa)
     <tr>
         <td>{{ $Mahasiswa->nim }}</td>
         <td>{{ $Mahasiswa->nama }}</td>
-        <td>{{ $Mahasiswa->kelas }}</td>
+        <td>{{ $Mahasiswa->kelas->nama_kelas }}</td>
         <td>{{ $Mahasiswa->jurusan }}</td>
         <td>{{ $Mahasiswa->no_handphone }}</td>
         <td>
