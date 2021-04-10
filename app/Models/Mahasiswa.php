@@ -27,7 +27,11 @@ class Mahasiswa extends Model
         'tgl_lahir'
     ];
 
-    public function kelas (){
+    public function kelas(){
         return $this ->belongsTo(Kelas::class);
+    }
+
+    public function matakuliah(){
+        return $this->belongsToMany(MataKuliah::class, 'mahasiswa_matakuliah', 'mahasiswa_nim', 'matakuliah_id')->withPivot('nilai');
     }
 }
