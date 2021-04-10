@@ -161,7 +161,7 @@ class MahasiswaController extends Controller
         //Jika data berhasil diupdate, akan kembali ke halaman utama
         Mahasiswa::find($nim)->update($request->all());
         return redirect()->route('mahasiswa.index')->with('success','Mahasiswa Berhasil Diupdate');
-    
+
     }
 
     /**
@@ -191,6 +191,11 @@ class MahasiswaController extends Controller
         })->paginate(5);
         return view('mahasiswas.index',compact('posts'));
         */
+    }
+
+    public function nilai($nim){
+        $mhs = Mahasiswa::find($nim);
+        return view('mahasiswas.nilai',compact('mhs'));
     }
 
 

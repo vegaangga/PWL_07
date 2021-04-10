@@ -26,3 +26,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('mahasiswa', MahasiswaController::class);
 
 Route::get('/search',[MahasiswaController::class, 'cari']);
+
+//praktikum 9 latihan
+Route::get('nilai/{nim}',[MahasiswaController::class,'nilai']);
