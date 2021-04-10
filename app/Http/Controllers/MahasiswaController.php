@@ -113,8 +113,15 @@ class MahasiswaController extends Controller
      */
     public function edit($nim)
     {
-        $mahasiswa=Mahasiswa::find($nim);
-        return view('mahasiswas.edit',compact('mahasiswa'));
+        //Praktikum orm
+        //$mahasiswa=Mahasiswa::find($nim);
+        //return view('mahasiswas.edit',compact('mahasiswa'));
+
+        //PRaktikum orm lanjutan
+        //Menampilkan detail data dengan menemukan berdasarkan nim mahasiswa untuk diedit
+        $mahasiswa = Mahasiswa::with('kelas')->where('nim',$nim)->first();
+        $kelas = Kelas::all(); // mendapatkan data dari tabel kelas
+        return view ('mahasiswas.edit',compact('mahasiswa','kelas'));
     }
 
     /**
@@ -126,16 +133,35 @@ class MahasiswaController extends Controller
      */
     public function update(Request $request, $nim)
     {
-        $request->validate(['nim'=>'required',
+        $request->validate([
+        'nim'=>'required',
         'nama'=>'required',
-        'kelas'=>'required',
         'jurusan'=>'required',
         'no_handphone'=>'required',
         'email'=>'required',
         'tgl_lahir'=>'required'
         ]);
+
+        $mahasiswa = Mahasiswa::with('kelas')->where('nim',$nim)->first();
+        $mahasiswa->nim = $request->get('nim');
+        $mahasiswa->nama = $request->get('nama');
+        $mahasiswa->jurusan = $request->get('jurusan');
+        $mahasiswa->no_handphone = $request->get('no_handphone');
+        $mahasiswa->email = $request->get('email');
+        $mahasiswa->tgl_lahir = $request->get('tgl_lahir');
+        $mahasiswa->save();
+
+        $kelas = new Kelas;
+        $kelas->id = $request->get('kelas');
+
+        // fungsi eloquent untuk menambah data dengan relasi belongsTo
+        $mahasiswa->kelas()->associate($kelas);
+        $mahasiswa->save();
+
+        //Jika data berhasil diupdate, akan kembali ke halaman utama
         Mahasiswa::find($nim)->update($request->all());
         return redirect()->route('mahasiswa.index')->with('success','Mahasiswa Berhasil Diupdate');
+    
     }
 
     /**
